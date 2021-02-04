@@ -10,7 +10,6 @@ from torch_geometric.data import DataLoader
 import matplotlib.pyplot as plt
 
 from models.pointnet2 import PointNet2
-from scripts.utils import plot_object
 
 def train_epoch():
     model.train()
@@ -49,7 +48,7 @@ dataset = ModelNet('./data/model-net', '10', True, transform, pre_transform)
 dataloader = DataLoader(dataset, num_workers=2, batch_size=16, shuffle=True)
 
 loss_dict = {}
-for lr in (5e-3, ):
+for lr in (1e-3, ):
     model = PointNet2().to(DEVICE)
     optimizer = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
@@ -57,7 +56,7 @@ for lr in (5e-3, ):
     key = lr
     loss_dict[key] = []
 
-    for epoch in range(1):
+    for epoch in range(5):
         loss = train_epoch()
         loss_dict[key].append(loss)
         acc = test()
@@ -72,4 +71,4 @@ for k in loss_dict.keys():
 plt.title('Losses')
 plt.gca().set_ylim(bottom=0.0) #Set the bottom to 0.0
 plt.legend()        
-plt.show()
+plt.savefig('loss_pointnet2.png')

@@ -4,10 +4,7 @@ import torch.nn.functional as F
 import torch_geometric.nn as gnn
 
 '''
-PointNet++ implementation using PyG
-
-TODO:
-- compare accuracy w/ example!
+PointNet++ (for classification) implementation using PyG
 '''
 
 def create_mlp(channels):
@@ -43,7 +40,6 @@ class GlobalAbstractionLayer(nn.Module):
         x = self.mlp(x)
         x = gnn.global_max_pool(x, batch)
         return x
-           
 
 class PointNet2(nn.Module):
     def __init__(self):
