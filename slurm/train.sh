@@ -10,4 +10,4 @@
 #SBATCH --error=slurm-%j.out
 
 source /usr/stud/kolmet/venv_pyg/bin/activate
-srun python -m scripts.train_pointnet2_classify
+srun python -m scripts.train_pointnet2_segment
