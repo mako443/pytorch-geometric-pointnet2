@@ -41,9 +41,9 @@ class GlobalAbstractionLayer(nn.Module):
         x = gnn.global_max_pool(x, batch)
         return x
 
-class PointNet2(nn.Module):
+class PointNet2Classify(nn.Module):
     def __init__(self):
-        super(PointNet2, self).__init__()
+        super(PointNet2Classify, self).__init__()
 
         self.set_abstraction0 = SetAbstractionLayer(0.5, 0.2, create_mlp([3, 64, 128]))
         self.set_abstraction1 = SetAbstractionLayer(0.25, 0.4, create_mlp([128 + 3, 128, 128]))

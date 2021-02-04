@@ -9,7 +9,7 @@ from torch_geometric.data import DataLoader
 
 import matplotlib.pyplot as plt
 
-from models.pointnet2 import PointNet2
+from models.pointnet2_classify import PointNet2Classify
 
 def train_epoch():
     model.train()
@@ -48,8 +48,8 @@ dataset = ModelNet('./data/model-net', '10', True, transform, pre_transform)
 dataloader = DataLoader(dataset, num_workers=2, batch_size=16, shuffle=True)
 
 loss_dict = {}
-for lr in (1e-3, ):
-    model = PointNet2().to(DEVICE)
+for lr in (5e-3, ):
+    model = PointNet2Classify().to(DEVICE)
     optimizer = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
 
